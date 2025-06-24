@@ -4,12 +4,9 @@ import json
 import toml
 import os
 import threading
-from dotenv import load_dotenv
 from wyl import config
 from wyl.app import create_app
 from wyl.logging import setup_logger
-
-load_dotenv(".env")
 
 running = True
 
