@@ -1,0 +1,10 @@
+[general]
+app_host = "0.0.0.0"
+app_port = 3003
+tz = "Europe/Berlin"
+
+[influx2]
+url = "http://192.168.137.51:8486"
+org = "WYL"
+token = "SmbR8ghdroIRJu191FpRf-WvT87Pxqc0Ogij0FHvKLNEaQrVjlwkW0tMwZcUVzkp0ZQ5G0fsCVo4pmie61ROsw=="
+bucket = "metrics"

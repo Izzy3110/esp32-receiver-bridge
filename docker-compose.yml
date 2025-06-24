@@ -1,0 +1,21 @@
+services:
+  web: 
+    container_name: receiver-web
+    build:
+      context: app
+      target: builder
+    # flask requires SIGINT to stop gracefully
+    # (default stop signal from Compose is SIGTERM)
+    stop_signal: SIGINT
+    healthcheck:
+      test: curl --fail http://localhost:3003/ || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    stdin_open: true
+    restart: on-failure
+    volumes:
+      - "./logs:/app/logs"
+    ports:
+      - '3003:3003'
