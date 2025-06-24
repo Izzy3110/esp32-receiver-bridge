@@ -10,20 +10,17 @@ on:
     - main
 
 jobs:
-  docker:
-    timeout-minutes: 10
+  docker-compose:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v1
+    - uses: actions/checkout@v4.2.2
 
-    - name: Start containers
-      run: docker-compose -f "docker-compose.yml" up -d --build
-
-    - name: Stop containers
-      if: always()
-      run: docker-compose -f "docker-compose.yml" down
+    - name: Run docker compose
+      uses: hoverkraft-tech/compose-action@v2.0.1
+      with:
+        compose-file: "./docker-compose.yml"
       
   build:
     runs-on: ubuntu-latest
