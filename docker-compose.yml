@@ -7,6 +7,9 @@ services:
     # flask requires SIGINT to stop gracefully
     # (default stop signal from Compose is SIGTERM)
     stop_signal: SIGINT
+    environment:
+      TZ: "Europe/Berlin"
+      INFLUXDB_BUCKET: "metrics"
     healthcheck:
       test: curl --fail http://localhost:3003/ || exit 1
       interval: 30s
