@@ -6,11 +6,11 @@ import pytz
 
 
 def localize_datetime(datetime_str: str):
-    return pytz.timezone(os.getenv('TZ')).localize(
-        datetime.strptime(
-            datetime_str,
-            "%Y-%m-%d %H:%M:%S")
-    ).isoformat()
+    return (
+        pytz.timezone(os.getenv("TZ"))
+        .localize(datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S"))
+        .isoformat()
+    )
 
 
 def format_value(value):
