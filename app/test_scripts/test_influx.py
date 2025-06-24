@@ -1,23 +1,19 @@
 import asyncio
 import os
 from datetime import datetime
-
 from influxdb_client.client.influxdb_client_async import InfluxDBClientAsync
-from dotenv import load_dotenv
+import toml
 
-load_dotenv('.env')
+parsed_toml = toml.loads(open("config.toml").read())
+toml_section: dict = parsed_toml.get('influx2')
+toml_section_general: dict = parsed_toml.get('general')
 
-# import toml
-# parsed_toml = toml.loads(open("config.toml").read())
-# toml_section: dict = parsed_toml.get('influx2')
-# bucket = toml_section.get('bucket')
+bucket = toml_section.get('bucket')
+url = toml_section.get('url')
+token = toml_section.get('token')
+org = toml_section.get('org')
 
-token = os.getenv("INFLUXDB_TOKEN")
-org = os.getenv('INFLUXDB_ORG')
-url = os.getenv('INFLUXDB_URL')
-bucket = os.getenv('INFLUXDB_BUCKET')
-
-tz = os.getenv('TZ')
+tz = toml_section_general.get('tz')
 
 
 # Function to format the field value correctly
@@ -60,18 +56,11 @@ data_json = {
     "sensor_datetime": datetime.now().isoformat()
 }
 
-"""
-print(token)
-print(bucket)
-print(url)
-print(org)
-print(tz)
-"""
-
 
 async def main():
     await send_sensor_to_influx(json_to_line_protocol(data_json))
     await asyncio.sleep(3)
     await query()
+
 if __name__ == '__main__':
     asyncio.run(main())
