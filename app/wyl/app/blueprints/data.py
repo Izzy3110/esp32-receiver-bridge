@@ -1,8 +1,8 @@
 import base64
-import os
 import json
 import uuid
 from flask import Blueprint, jsonify, request
+
 from wyl import config
 from wyl.helpers import localize_datetime
 from wyl.influx import send_sensor_to_influx
@@ -42,7 +42,7 @@ async def device_data():
     line_protocol_data = json_device_to_line_protocol(json_device_data)
 
     config.logger.debug(line_protocol_data)
-    await send_sensor_to_influx(os.getenv("influxdb_bucket"), line_protocol_data)
+    await send_sensor_to_influx(line_protocol_data)
     return jsonify(json_device_data)
 
 
@@ -69,7 +69,7 @@ async def sensor_post():
     line_protocol_data = json_to_line_protocol(json_data)
     config.logger.debug(f"data: {line_protocol_data}")
 
-    await send_sensor_to_influx(os.getenv("INFLUXDB_BUCKET"), line_protocol_data)
+    await send_sensor_to_influx(line_protocol_data)
     await config.queue.put(
         (base64.b64encode(json.dumps(json_data).encode("utf-8")).decode("utf-8"),)
     )

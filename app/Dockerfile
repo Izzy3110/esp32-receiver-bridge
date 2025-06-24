@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 RUN apk --no-cache add curl
 
 COPY . /app
-COPY .env /app/.env
+
 ENTRYPOINT ["python3"]
 CMD ["app.py"]
 
