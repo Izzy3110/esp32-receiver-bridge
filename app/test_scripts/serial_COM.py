@@ -3,13 +3,18 @@ import serial
 import time
 import logging
 
-logging.basicConfig(filename="app/logs/serial.log", encoding="UTF-8", filemode="a", format='%(asctime)s.%(msecs)03d '
-                                                                                           '%(filename)s: '
-                                                                                           '%(levelname)s: '
-                                                                                           '%(funcName)s(): '
-                                                                                           '%(lineno)d:\t'
-                                                                                           '%(message)s',
-                    datefmt='%Y-%m-%d %H:%M:%S')
+logging.basicConfig(
+    filename="app/logs/serial.log",
+    encoding="UTF-8",
+    filemode="a",
+    format="%(asctime)s.%(msecs)03d "
+    "%(filename)s: "
+    "%(levelname)s: "
+    "%(funcName)s(): "
+    "%(lineno)d:\t"
+    "%(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 logger = logging.getLogger("serial")
 logger.setLevel(logging.DEBUG)
 

@@ -9,7 +9,7 @@ def setup_logger():
         filename=config.log_filepath,
         filemode="a",
         level=logging.DEBUG,
-        encoding="utf-8"
+        encoding="utf-8",
     )
 
     logger = logging.getLogger(__name__)
