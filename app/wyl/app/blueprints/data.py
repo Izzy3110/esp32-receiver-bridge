@@ -57,8 +57,6 @@ async def sensor_post():
     sensor_name = request.form.get("sensor")
     sensor_data = request.form.get("data")
 
-    # print(f"{dt}: [{device_id_}] ({sensor_name}): {sensor_data}")
-
     json_data = {
         "device_id": device_id_,
         "sensor_name": sensor_name,
@@ -70,8 +68,12 @@ async def sensor_post():
     config.logger.debug(f"data: {line_protocol_data}")
 
     await send_sensor_to_influx(line_protocol_data)
+
+    """
     await config.queue.put(
         (base64.b64encode(json.dumps(json_data).encode("utf-8")).decode("utf-8"),)
     )
     config.logger.debug(f"qsize: {config.queue.qsize()}")
+    """
+
     return jsonify({"success": True})

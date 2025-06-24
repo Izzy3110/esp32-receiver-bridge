@@ -61,7 +61,7 @@ def start_background_loop(loop_):
 
 
 if __name__ == "__main__":
-    loop = asyncio.new_event_loop()
-    start_background_loop(loop)
-    asyncio.run_coroutine_threadsafe(monitor_queue(), loop)
+    # loop = asyncio.new_event_loop()
+    # start_background_loop(loop)
+    # asyncio.run_coroutine_threadsafe(monitor_queue(), loop)
     app.run(host=app_host, port=app_port, debug=True)
